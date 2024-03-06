@@ -1,3 +1,6 @@
+<?php
+require "header.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,15 +11,11 @@
 </head>
 
 <body>
-<div class="navbar">
-    <button onclick="previousPage()">
-        <img src="Images/backArrow.png" alt="Go Back">
-    </button>
-</div>
+
     <h1>Customer Service Form</h1>
     <form action="process_form.php" method="POST">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
+        <input type="text" id="DateOf" name="name" required><br><br>
         
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>

@@ -1,16 +1,16 @@
+<?php
+require "header.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log In</title>
+    <title>Order</title>
     <link rel="stylesheet" type="text/css" href="CSS/computerShop.css">
     <script src="Javascript/extraFunctionality.js"></script>
 </head>
+
 <body>
-<div class="navbar">
-    <button onclick="previousPage()">
-        <img src="Images/backArrow.png" alt="Go Back">
-    </button>
-</div>
+
 </body>
 </html>

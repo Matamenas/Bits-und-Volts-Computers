@@ -1,17 +1,21 @@
+<?php
+require "header.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Basket</title>
+    <title>Account</title>
     <link rel="stylesheet" type="text/css" href="CSS/computerShop.css">
     <script src="Javascript/extraFunctionality.js"></script>
 </head>
 
 <body>
-<div class="navbar">
-    <button onclick="previousPage()">
-        <img src="Images/backArrow.png" alt="Go Back">
-    </button>
-</div>
+
+<button><a href="signUp.php">Sign Up</a></button>
+<button><a href="login.php">Log In</a></button>
+
+
 </body>
 </html>
