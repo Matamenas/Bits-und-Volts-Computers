@@ -1,6 +1,8 @@
+<script src="Javascript/extraFunctionality.js"></script>
 <?php
+
 // Database connection parameters
-$host = '127.0.0.1'; // Change this if your database is hosted elsewhere
+$host = '127.0.0.1';
 $dbname = 'bitsundvoltsfinal';
 $username = 'root';
 $password = null;
@@ -26,7 +28,6 @@ try {
 
     $stmt->execute();
 
-    echo "Sign up successful!";
 } catch(PDOException $e) {
     // Print PDO exception message
     echo "Error: " . $e->getMessage();

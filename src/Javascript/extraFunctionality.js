@@ -6,6 +6,10 @@ function previousPage() {
         window.history.back();
     } else {
         // If there is no previous page, redirect to the homepage
-        window.location.href = 'home.html'; // Replace 'index.html' with your homepage URL
+        window.location.href = 'home.php'; // Replace 'index.html' with your homepage URL
     }
+}
+
+function redirectPage() {
+    window.location.href = 'login.php'
 }

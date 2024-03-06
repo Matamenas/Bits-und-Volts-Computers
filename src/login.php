@@ -9,17 +9,17 @@ require "header.php";
     <link rel="stylesheet" type="text/css" href="CSS/computerShop.css">
     <script src="Javascript/extraFunctionality.js"></script>
 </head>
-<div class="wrapper">
+
     <h2>Login</h2>
-    <?php if(isset($login_err)) echo $login_err; ?>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label>Email</label>
-        <input type="text" name="email" required><br>
-        <label>Password</label>
-        <input type="password" name="password" required><br>
+    <form action="process_login.php" method="POST">
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="userPassword">Password:</label><br>
+        <input type="password" id="userPassword" name="userPassword" required><br><br>
+
         <input type="submit" value="Login">
     </form>
-</div>
 </body>
 </html>
 </body>

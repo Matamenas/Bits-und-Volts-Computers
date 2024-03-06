@@ -35,7 +35,7 @@ require "header.php";
     <label for="userPassword">Password:</label><br>
     <input type="password" id="userPassword" name="userPassword" required><br><br>
 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" href="login.php">
 </form>
 </body>
 </html>
