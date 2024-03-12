@@ -1,11 +1,7 @@
 <?php
 session_start(); // Start session to store user login status
 
-// Database connection parameters
-$host = '127.0.0.1';
-$dbname = 'bitsundvoltsfinal';
-$username = 'root';
-$password = null;
+require_once "dbconn.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate form inputs
@@ -26,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verify password
         if ($user && password_verify($password, $user['userPassword'])) {
-            // Password is correct, set session variables and redirect to dashboard
+            // Password is correct, set session variables and redirect to home page
             $_SESSION['email'] = $user['emailAddress'];
             $_SESSION['firstName'] = $user['firstName'];
             $_SESSION['lastName'] = $user['lastName'];
