@@ -13,3 +13,7 @@ function previousPage() {
 function redirectPage() {
     window.location.href = 'login.php'
 }
+
+function returnHome() {
+    window.location.href = 'home.php'
+}

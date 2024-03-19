@@ -1,5 +1,5 @@
 <?php
-require "header.php";
+require "Template/header.php";
 ?>
 <!-- Home Page includes the Product Page -->
 <!DOCTYPE html>

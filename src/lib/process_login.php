@@ -1,14 +1,14 @@
 <?php
 session_start(); // Start session to store user login status
 
-require_once "dbconn.php";
+include
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate form inputs
     $email = $_POST['email'];
     $password = $_POST['password'];
-
     try {
+
         // Connect to the database
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['firstName'] = $user['firstName'];
             $_SESSION['lastName'] = $user['lastName'];
 
-            header("Location: home.php");
+            header("Location: ../home.php");
             exit();
         } else {
             $error_message = "Invalid email or password.";

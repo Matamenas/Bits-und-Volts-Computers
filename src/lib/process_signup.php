@@ -1,19 +1,15 @@
+
 <script src="Javascript/extraFunctionality.js"></script>
+
 <?php
 
-// Database connection parameters
-$host = '127.0.0.1';
-$dbname = 'bitsundvoltsfinal';
-$username = 'root';
-$password = null;
+    try {
+        require "../func/dbconn.php";
+        // Connect to the database
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-try {
-    // Connect to the database
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-
-    // Set PDO to throw exceptions on errors
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        // Set PDO to throw exceptions on errors
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // Prepare SQL statement for insertion
     $stmt = $pdo->prepare("INSERT INTO Customer (firstName, lastName, address, emailAddress, paymentType, paymentDetails, userPassword) VALUES (?, ?, ?, ?, ?, ?,?)");
 
@@ -28,6 +24,10 @@ try {
 
     $stmt->execute();
 
+    echo "Aye man, well done on the account creation. PC JUNKIE BOI, YOU DONKEY!! WHERES THE LAMB SAUCE??!?!?!?!";
+
+        header("Location: ../home.php");
+        exit(); // Make sure that subsequent code doesn't execute after redirection
 } catch(PDOException $e) {
     // Print PDO exception message
     echo "Error: " . $e->getMessage();

@@ -1,6 +1,6 @@
 
 <?php
-require "header.php";
+require "Template/header.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">

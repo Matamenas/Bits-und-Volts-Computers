@@ -1,12 +1,18 @@
 <?php
-// Database connection parameters
+
 $host = '127.0.0.1';
-$dbname = 'bitsundvoltsfinal';
+$dbname = 'bitsundvoltsfinal2';
 $username = 'root';
 $password = null;
 
-$conn=mysqli_connect($host,$username,$password,"$dbname");
-if(!$conn){
-    die('Could not Connect MySql Server:' .mysql_error());
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+    // Set PDO to throw exceptions on errors
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch(PDOException $e) {
+    // Print PDO exception message
+    echo "Error: " . $e->getMessage();
 }
-?>
