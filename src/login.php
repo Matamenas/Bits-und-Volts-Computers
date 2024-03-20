@@ -11,7 +11,7 @@ require "Template/header.php";
 </head>
 
     <h2>Login</h2>
-    <form action="process_login.php" method="POST">
+    <form action="lib/process_login.php" method="POST">
         <label for="email">Email Address:</label><br>
         <input type="email" id="email" name="email" required><br><br>
 
@@ -20,7 +20,5 @@ require "Template/header.php";
 
         <input type="submit" value="Login">
     </form>
-</body>
-</html>
 </body>
 </html>

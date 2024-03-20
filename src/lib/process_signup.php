@@ -24,7 +24,7 @@
 
     $stmt->execute();
 
-    echo "Aye man, well done on the account creation. PC JUNKIE BOI, YOU DONKEY!! WHERES THE LAMB SAUCE??!?!?!?!";
+    echo "Aye man, well done on the account creation.";
 
         header("Location: ../home.php");
         exit(); // Make sure that subsequent code doesn't execute after redirection
