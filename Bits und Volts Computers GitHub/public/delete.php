@@ -7,18 +7,18 @@ if (isset($_GET["id"])) {
     try {
         require_once '../src/DBconnect.php';
         $id = $_GET["id"];
-        $sql = "DELETE FROM users WHERE id = :id";
+        $sql = "DELETE FROM customer WHERE id = :id";
         $statement = $connection->prepare($sql);
         $statement->bindValue(':id', $id);
         $statement->execute();
         $success = "User ". $id. " successfully deleted";
- } catch(PDOException $error) {
+    } catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
 }
 try {
     require_once '../src/DBconnect.php';
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM customer";
     $statement = $connection->prepare($sql);
     $statement->execute();
     $result = $statement->fetchAll();
@@ -35,10 +35,9 @@ try {
             <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Address</th>
             <th>Email Address</th>
-            <th>Age</th>
-            <th>Location</th>
-            <th>Date</th>
+            <th>Password</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -48,10 +47,9 @@ try {
                 <td><?php echo escape($row["id"]); ?></td>
                 <td><?php echo escape($row["firstname"]); ?></td>
                 <td><?php echo escape($row["lastname"]); ?></td>
+                <td><?php echo escape($row["address"]); ?></td>
                 <td><?php echo escape($row["email"]); ?></td>
-                <td><?php echo escape($row["age"]); ?></td>
-                <td><?php echo escape($row["location"]); ?></td>
-                <td><?php echo escape($row["date"]); ?> </td>
+                <td><?php echo escape($row["password"]); ?></td>
                 <td><a href="delete.php?id=<?php echo escape($row["id"]);
                     ?>">Delete</a></td>
             </tr>
