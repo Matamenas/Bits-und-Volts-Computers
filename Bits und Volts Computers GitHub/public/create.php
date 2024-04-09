@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
             "lastname" => escape($_POST['lastname']),
             "address" => escape($_POST['address']),
             "email" => escape($_POST['email']),
-            "password" => escape($_POST['password'])
+            "password" => escape(password_hash($_POST['password'], PASSWORD_DEFAULT))
         );
         $sql = sprintf("INSERT INTO %s (%s) values (%s)", "customer",
             implode(", ", array_keys($new_user)),
