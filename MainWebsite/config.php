@@ -4,7 +4,7 @@
  *
  */
 $host = "localhost";
-$username = "root";
+$username = "DatabaseUser";
 $password = "";
 $dbname = "customerDB"; // will use later
 $dsn = "mysql:host=$host;dbname=$dbname"; // will use later

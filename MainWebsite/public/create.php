@@ -39,6 +39,7 @@ if (isset($_POST['submit']) && $statement) {
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
         <input type="submit" name="submit" value="Submit">
+        <?php var_dump($_POST); ?>
     </form>
     <a href="index.php">Back to home</a>
 <?php include "templates/footer.php"; ?>
