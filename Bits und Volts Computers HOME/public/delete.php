@@ -12,7 +12,7 @@ if (isset($_GET["id"])) {
         $statement->bindValue(':id', $id);
         $statement->execute();
         $success = "User ". $id. " successfully deleted";
-    } catch(PDOException $error) {
+ } catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
 }

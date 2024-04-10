@@ -6,8 +6,8 @@ include "../config.php"; // Include your database configuration file
 
 // Check if form is submitted
 if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = trim($_POST['email']);
+    $userPassword = trim($_POST['password']);
 
     try {
         require_once '../src/DBconnect.php';
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         $user = $statement->fetch();
 
         // Verify password
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($userPassword, $user['password'])) {
             // Password is correct, start session or perform other actions
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
