@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BitsUndVolts</title>
+    <link rel="stylesheet" href="css/RegisterStyling.css">
+</head>
+
 <?php
 if (isset($_POST['submit'])) {
     require '../common.php';
@@ -26,19 +36,21 @@ if (isset($_POST['submit']) && $statement) {
     exit;
     }
 ?>
+<div class="container">
     <h2>Create an Account</h2>
     <form method="post">
-        <label for="firstname">First Name</label>
-        <input type="text" name="firstname" id="firstname" required>
-        <label for="lastname">Last Name</label>
-        <input type="text" name="lastname" id="lastname" required>
-        <label for="address">Address</label>
-        <input type="text" name="address" id="address" required>
-        <label for="email">Email Address</label>
-        <input type="email" name="email" id="email" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" name="submit" value="Submit">
-    </form>
+            <label for="firstname">First Name</label>
+            <input type="text" name="firstname" id="firstname" required>
+            <label for="lastname">Last Name</label>
+            <input type="text" name="lastname" id="lastname" required>
+            <label for="address">Address</label>
+            <input type="text" name="address" id="address" required>
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </div>
     <a href="index.php">Back to home</a>
 <?php include "templates/footer.php"; ?>

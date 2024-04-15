@@ -8,3 +8,5 @@ CREATE DATABASE customerDB;
  email VARCHAR(50) NOT NULL,
  password VARCHAR(18) NOT NULL
  );
+
+CREATE TABlE products
