@@ -2,17 +2,24 @@
 /**
  * List all users with a link to edit
  */
+session_start();
+
+// Check if a user is logged in
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+
     try {
         require "../common.php";
         require_once '../src/DBconnect.php';
-        $sql = "SELECT * FROM customer";
+        $sql = "SELECT * FROM customer WHERE email = :email";
         $statement = $connection->prepare($sql);
+        $statement->bindValue(':email', $email);
         $statement->execute();
         $result = $statement->fetchAll();
-    }
-    catch(PDOException $error) {
+    } catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
+}
 ?>
 
 <?php require "templates/header.php"; ?>
@@ -44,3 +51,4 @@
     </tbody>
 </table>
 <a href="index.php">Back to home</a>
+<?php require "templates/footer.php"; ?>
