@@ -1,31 +1,34 @@
 <?php
-require '../common.php';
-
 if (isset($_POST['submit'])) {
-    require_once '../src/DBconnect.php';
-
+    require '../common.php';
     try {
+        require_once '../src/DBconnect.php';
+
+        // Hash the password
+        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
         $new_user = array(
-            "firstname" => $_POST['firstname'],
-            "lastname" => $_POST['lastname'],
-            "address" => $_POST['address'],
-            "email" => $_POST['email'],
-            //PROTECTION: Hashing Password for data integrity
-            "password" => $_POST['password']
+            "firstname" => escape($_POST['firstname']),
+            "lastname" => escape($_POST['lastname']),
+            "address" => escape($_POST['address']),
+            "email" => escape($_POST['email']),
+            "password" => $hashedPassword
         );
 
-        $sql = "INSERT INTO customer (firstname, lastname, address, email, password) VALUES (:firstname, :lastname, :address, :email, :password)";
+        $sql = sprintf("INSERT INTO %s (%s) values (%s)", "customer",
+            implode(", ", array_keys($new_user)),
+            ":" . implode(", :", array_keys($new_user)));
 
         $statement = $connection->prepare($sql);
         $statement->execute($new_user);
 
+        // Redirect after successful insertion
         header("Location: dashboard.php");
         exit;
     } catch(PDOException $error) {
-        echo "Error: " . $error->getMessage();
+        echo $sql . "<br>" . $error->getMessage();
     }
 }
-
 require "templates/header.php";
 ?>
 

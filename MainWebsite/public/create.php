@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
             "lastname" => escape($_POST['lastname']),
             "address" => escape($_POST['address']),
             "email" => escape($_POST['email']),
-            "password" => escape(password_hash($_POST['password'], PASSWORD_DEFAULT))
+            "password" => escape(($_POST['password']))
         );
         $sql = sprintf("INSERT INTO %s (%s) values (%s)", "customer",
             implode(", ", array_keys($new_user)),
@@ -39,7 +39,6 @@ if (isset($_POST['submit']) && $statement) {
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
         <input type="submit" name="submit" value="Submit">
-        <?php var_dump($_POST); ?>
     </form>
     <a href="index.php">Back to home</a>
 <?php include "templates/footer.php"; ?>

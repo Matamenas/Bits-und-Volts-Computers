@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         $user = $statement->fetch();
 
         // Verify password
-        if ($user && password_verify($userPassword, $user['password'])) {
+        if ($user && password($userPassword, $user['password'])) {
             // Password is correct, start session or perform other actions
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;

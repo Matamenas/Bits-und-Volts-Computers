@@ -3,9 +3,10 @@ session_start();
 include "templates/header.php";
 include "../config.php"; // Include your database configuration file
 
+$error = ""; // Initialize error variable
+
 if (isset($_POST['submit'])) {
     $email = trim($_POST['email']);
-    //PROTECTION: Hashing Password for data integrity
     $userPassword = trim($_POST['password']);
 
     try {
@@ -17,13 +18,15 @@ if (isset($_POST['submit'])) {
         $statement->execute(['email' => $email]);
         $user = $statement->fetch();
 
-        // Debug output to check if user is retrieved
-        var_dump($user);
-
         if ($user) {
             // Verify password
             if (password_verify($userPassword, $user['password'])) {
-                echo "User Logged In!";
+                // Start session and store user information
+                $_SESSION['loggedin'] = true;
+                $_SESSION['email'] = $email;
+                // Redirect to dashboard or any other page
+                header("Location: dashboard.php");
+                exit;
             } else {
                 // Incorrect password
                 $error = "Incorrect password";
@@ -39,24 +42,24 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<h2>Log In</h2>
-<form method="post">
-    <label for="email">Email Address</label>
-    <input type="email" name="email" id="email" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" name="submit" value="Submit">
-</form>
+    <h2>Log In</h2>
+    <form method="post">
+        <label for="email">Email Address</label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <input type="submit" name="submit" value="Submit">
+    </form>
 
 <?php
 // Display error message if exists
-if (isset($error)) {
+if ($error !== "") {
     echo '<p>' . $error . '</p>';
 }
 ?>
 
-<a href="index.php">Back to home</a>
-<br><br>
-<a href="create.php"><strong>Register Here</strong></a> - new to BitsUndVolts
+    <a href="index.php">Back to home</a>
+    <br><br>
+    <a href="create.php"><strong>Register Here</strong></a> - new to BitsUndVolts
 
 <?php include "templates/footer.php"; ?>
