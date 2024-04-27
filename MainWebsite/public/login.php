@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
             if ($email === 'Admin123@gmail.com') {
-                header("Location: AddProducts.php");
+                header("Location: indexlogged.php");
             } else {
                 header("Location: indexlogged.php");
             }

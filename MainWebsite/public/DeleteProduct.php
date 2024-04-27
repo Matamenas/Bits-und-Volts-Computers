@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Product</title>
-    <link rel="stylesheet" href="css/DeleteProduct.css">
+    <link rel="stylesheet" href="css/DeleteStyling.css">
 </head>
 <body>
     <div class="container">
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
             <input type="submit" name="delete_product" value="Delete Product">
         </form>
-        <a href="ProductsPage.php">Back to Products Page</a>
+        <a href="AddProducts.php">Back to AddProducts</a>
     </div>
 </body>
 </html>

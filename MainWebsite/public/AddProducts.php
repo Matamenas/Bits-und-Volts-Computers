@@ -25,9 +25,15 @@
             <input type="file" id="product_image" name="product_image" accept="image/*" required>
 
             <input type="submit" value="Add Product" name="submit">
-
-            <a href="DeleteProduct.php" class="btn">Go to Delete Products Page</a>
         </form>
+
+        <div class="button-container">
+            <a href="DeleteProduct.php" class="btn">Go to Delete Products Page</a><br>
+            <a href="Orders.php" class="btn">Go to Orders Page</a><br>
+            <a href="indexlogged.php">Back to HomePage</a>
+        </div>
+
+   
 
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
