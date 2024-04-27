@@ -41,7 +41,7 @@
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-            // Check if image file is a actual image or fake image
+            // Check if image file is an actual image or fake image
             $check = getimagesize($_FILES["product_image"]["tmp_name"]);
             if ($check !== false) {
                 $uploadOk = 1;

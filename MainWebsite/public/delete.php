@@ -32,7 +32,6 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SES
         $result = $statement->fetchAll();
 
         // Debugging output
-        var_dump($result);
     } catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
@@ -71,5 +70,5 @@ $result = $result ?? [];
             <?php endforeach; ?>
         </tbody>
     </table>
-    <a href="index.php">Back to home</a>
+    <a href="indexlogged.php.php">Back to home</a>
 <?php require "templates/footer.php"; ?>

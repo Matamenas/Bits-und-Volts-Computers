@@ -1,4 +1,5 @@
 <?php include "templates/header.php"; ?>
+
 <link rel="stylesheet" type="text/css" href="css/Index.css">
 
 <div class="navbar">
@@ -31,10 +32,5 @@
     </div>
   </div>
 
-  <div class="footer">
-    <p>This is the footer.</p>
-  </div>
-</div>
-
-<?php include "templates/footer.php"; ?>
+<?php include "templates/homePageFooter.php"; ?>
 

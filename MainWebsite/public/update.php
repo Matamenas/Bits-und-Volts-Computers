@@ -50,5 +50,5 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SES
     <?php endforeach; ?>
     </tbody>
 </table>
-<a href="index.php">Back to home</a>
+<a href="indexlogged.php">Back to home</a>
 <?php require "templates/footer.php"; ?>

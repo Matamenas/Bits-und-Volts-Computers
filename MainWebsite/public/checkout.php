@@ -5,6 +5,7 @@ require_once '../src/DBconnect.php';
 // Check if user is logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['email'])) {
     header("Location: index.php");
+
     exit;
 }
 

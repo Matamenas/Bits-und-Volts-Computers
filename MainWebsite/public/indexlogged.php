@@ -86,7 +86,7 @@ if(isset($_FILES['upload'])) {
 }
 ?>
 
-<link rel="stylesheet" type="text/css" href="css/index.css"> <!-- Link your index.css file -->
+<link rel="stylesheet" type="text/css" href="css/index.css">
 
 <div class="navbar">
   <div class="navbar-left">
@@ -106,12 +106,11 @@ if(isset($_FILES['upload'])) {
     }
     ?>
     <form method="post">
-      <input type="submit" name="logout" value="Logout">
+      <input type="submit" name="logout" value="Logout" class="button">
     </form>
   </div>
 </div>
 
-<!-- Add this form where you want to allow users to upload an image -->
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
     <input type="file" name="upload" id="upload">
     <input type="submit" value="Upload Image" name="submit">
@@ -132,11 +131,8 @@ if(isset($_FILES['upload'])) {
   </div>
 </div>
 
-<div class="footer">
-  <p>This is the footer.</p>
-</div>
 
-<?php include "templates/footer.php"; ?>
+<?php include "templates/homePageFooter.php"; ?>
 
 <script>
   function checkLogin() {
