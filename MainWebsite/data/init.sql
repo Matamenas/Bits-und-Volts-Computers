@@ -29,3 +29,7 @@ CREATE TABLE cart (
     FOREIGN KEY (customer_id) REFERENCES customer(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
+
+
+
+ALTER TABLE customerdb.customer ADD COLUMN profilepic VARCHAR(255);

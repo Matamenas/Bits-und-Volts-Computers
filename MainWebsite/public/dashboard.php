@@ -18,8 +18,7 @@ echo "<p>You are logged in as " . $_SESSION['email'] . "</p>";
 ?>
 <li><a href="update.php"><strong>Update</strong></a> - update your info</li>
 <li><a href="delete.php"><strong>Delete</strong></a> - delete your account</li>
-<li><a href="ProductsPage.php"><strong>Products page</strong></a> - Products</li>
-<a href="index.php">Back to home</a>
+<a href="indexlogged.php">Back to home</a>
 
 <?php
 // Include footer

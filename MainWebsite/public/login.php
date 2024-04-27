@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
             if ($email === 'Admin123@gmail.com') {
                 header("Location: AddProducts.php");
             } else {
-                header("Location: ProductsPage.php");
+                header("Location: indexlogged.php");
             }
             exit;
         } else {
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
         <?php if (isset($error)): ?>
             <p><?php echo $error; ?></p>
         <?php endif; ?>
-        <a href="index.php">Back to home</a>
+        <a href="indexlogged.php">Back to home</a>
         <br><br>
         <a href="create.php"><strong>Register Here</strong></a> - new to BitsUndVolts
     </div>

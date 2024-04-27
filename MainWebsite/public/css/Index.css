@@ -1,0 +1,62 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Nunito:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; /* Default font for content */
+}
+
+.container {
+  background-color: #fff; /* Set container background to white */
+}
+
+.navbar {
+  font-family: 'Roboto', sans-serif; /* Font for navbar title */
+  background-color: #f0f0f0; /* Light gray background for navbar */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar a, .login-btn p {
+  color: #000; /* Black color */
+  text-decoration: none;
+  margin-right: 20px; /* Adjust spacing between navbar links */
+}
+
+.navbar a:hover, .login-btn:hover p {
+  color: #fff; /* White color on hover */
+  background-color: #555; /* Darker background color on hover */
+}
+
+.login-btn {
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center vertically */
+}
+
+.login-btn .profile-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px; /* Add margin for spacing */
+  background-size: cover;
+}
+
+.row {
+  font-family: 'Open Sans', sans-serif; /* Font for column content */
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 10px;
+}
+
+.footer {
+  font-family: 'Nunito', sans-serif; /* Font for footer text */
+  background-color: #f0f0f0; /* Light gray background for footer */
+  color: #000; /* Black color */
+  text-align: center;
+  padding: 20px;
+}

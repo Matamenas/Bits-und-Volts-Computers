@@ -52,5 +52,5 @@ if (isset($_POST['submit']) && $statement) {
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>
-    <a href="index.php">Back to home</a>
+    <a href="indexlogged.php">Back to home</a>
 <?php include "templates/footer.php"; ?>
