@@ -9,7 +9,7 @@
 </head>
 
 <?php
-//form to create a new user in the database aka the register page
+//form to create a new user in the database aka the register paged
 if (isset($_POST['submit'])) {
     require '../common.php';
     try {
@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
 require "templates/header.php";
 if (isset($_POST['submit']) && $statement) {
     echo $new_user['firstname']. ' successfully added';
-    header("Location: dashboard.php");
+    header("Location: login.php?registered=true");
     exit;
     }
 ?>
@@ -53,5 +53,4 @@ if (isset($_POST['submit']) && $statement) {
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>
-    <a href="indexlogged.php">Back to home</a>
-<?php include "templates/footer.php"; ?>
+    <a href="indexlogged.php" class="btn">Back to home</a>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "templates/header.php";
 
 //check login status //dashboard to acces different account options
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -8,7 +8,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 
-include "templates/header.php";
+
 ?>
 <link rel="stylesheet" href="css/DashboardStyling.css">
 <div class="container">
@@ -21,7 +21,3 @@ include "templates/header.php";
     <a href="indexlogged.php" class="btn">Back to Home</a>
 </div>
 
-<?php
-
-include "templates/footer.php";
-?>

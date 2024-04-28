@@ -1,3 +1,5 @@
+<?php
+
 // Check if file is uploaded
 if(isset($_FILES['upload'])) {
     $targetDir = "uploads/profile/";

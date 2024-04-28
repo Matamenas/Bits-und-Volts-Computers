@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'templates/header.php';
 require_once '../src/DBconnect.php';
 
 //check login status

@@ -1,16 +1,11 @@
 <?php
-
-session_start();
+include 'templates/header.php';
 
 //check login status
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: index.php");
     exit;
 }
-
-include "templates/header.php";
-
-
 
 //logout logic
 if(isset($_POST['logout'])) {
@@ -58,29 +53,25 @@ if(isset($_POST['logout'])) {
 
 
 <div class="row">
-  <div class="column">
-    <h2>Column 1</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut ultricies lacus. Fusce in aliquam velit. Quisque eget eros nec odio semper gravida.</p>
-  </div>
-  <div class="column">
-    <h2>Column 2</h2>
-    <p>Nullam vel risus leo. Maecenas in efficitur odio. Sed nec turpis at velit fermentum dapibus. Morbi nec rutrum quam, vel semper velit.</p>
-  </div>
-  <div class="column">
-    <h2>Column 3</h2>
-    <p>Curabitur convallis nisi nec nunc fermentum, sit amet molestie lacus elementum. Ut dignissim orci nec nulla laoreet auctor. Donec sit amet vehicula elit.</p>
-  </div>
+    <div class="column">
+        <h2>Bits Und Volts</h2>
+        <h3>Who Are We?</h3>
+        <p>Bits Und Volts powered by Byte Incorporated aims to provide the Personal Desktop community a wide range of high quality computer parts. From Graphics Cards (GPU) to Central Processing Units (CPU), from Cases to RGB Fans. Customize. Create. GAME!</p>
+    </div>
+    <div class="column">
+        <h2>What We Have To Offer?</h2>
+        <p>If you would like to explore our products click the button below.</p><br>
+        <a href="ProductsPage.php" class="product-btn">Explore!</a>
+    </div>
+    <div class="column">
+        <h2>Welcome To The Bits Und Volts Club</h2>
+        <p>we provide cheap delivery and products at the best price. We value you... Our loyal customer.</p>
+    </div>
 </div>
 
 <div class="footer">
-  <p>This is the footer.</p>
+    <?php include "templates/footer.php"; ?>
 </div>
 
-<?php include "templates/footer.php"; ?>
 
-<script>
-  function checkLogin() {
-    alert("You must be logged in to manage your account.");
-    return false; 
-  }
-</script>
+

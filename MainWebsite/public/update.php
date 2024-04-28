@@ -28,7 +28,7 @@
     }
     ?>
 
-    <?php require "templates/header.php"; ?>
+
     <div class="container">
         <h2>Update Customer Info</h2>
         <table>
@@ -59,6 +59,5 @@
         </table>
         <a href="dashboard.php" class="btn">Back</a>
     </div>
-    <?php require "templates/footer.php"; ?>
 </body>
 </html>

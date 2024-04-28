@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,7 +121,7 @@ echo "</table>";
 
 
 
-include "templates/footer.php";
+
 ?>
 <a href="AddProducts.php">Back to AddProducts</a>
 </body>

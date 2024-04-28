@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <textarea id="issue_text" name="issue_text" rows="4" cols="50" required></textarea><br><br>
         
         <input type="submit" value="Submit Ticket">
-        <a href="indexlogged.php" class="button">HomePage</a>
+        <a href="indexlogged.php" class="button">Back To Home</a>
     </form>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "templates/header.php";
 require_once '../src/DBconnect.php';
 
 //check login status
@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_
 }
 
 
-include "templates/header.php";
+
 
 //display logged in users details
 echo "<h2>Account Dashboard</h2>";
@@ -38,7 +38,6 @@ if ($customerId) {
 } else {
     $cartItems = [];
 }
-
 //decrease quantity of items in cart and database
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
     //get product id
@@ -129,8 +128,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
     </div>
 </body>
 </html>
-
-<?php
-
-include "templates/footer.php";
-?>

@@ -39,8 +39,6 @@
             $statement->execute();
             $result = $statement->fetchAll();
 
-            
-            var_dump($result);
         } catch(PDOException $error) {
             echo $sql . "<br>" . $error->getMessage();
         }
@@ -82,6 +80,6 @@
         </table>
         <a href="dashboard.php" class="btn">Back</a>
     </div>
-    <?php require "templates/footer.php"; ?>
+
 </body>
 </html>

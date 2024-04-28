@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'templates/header.php';
 require_once '../src/DBconnect.php';
 
 //check if product is being added into the cart
@@ -101,10 +101,9 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             <?php endforeach; ?>
         </div>
-        <a href="Cart.php" class="button">View Cart</a><br>
+        <a href="Cart.php" class="button">View Cart</a> &nbsp;&nbsp;&nbsp;
 
-        <a href="indexlogged.php" class="button">HomePage</a>
-        
+        <a href="indexlogged.php" class="btn">HomePage</a>
 
     </div>
    

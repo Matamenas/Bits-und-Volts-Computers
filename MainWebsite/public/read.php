@@ -1,4 +1,5 @@
 <?php
+include "templates/header.php";
 /**
  * 
  * 
@@ -20,7 +21,7 @@ if (isset($_POST['submit'])) {
         echo $sql . "<br>" . $error->getMessage();
     }
 }
-require "templates/header.php";
+
 if (isset($_POST['submit'])) {
     if ($result && $statement->rowCount() > 0) {
         ?>
@@ -65,5 +66,3 @@ if (isset($_POST['submit'])) {
         <input type="submit" name="submit" value="View Results">
     </form>
     <a href="index.php">Back to home</a>
-
-<?php require "templates/footer.php"; ?>
