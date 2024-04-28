@@ -10,7 +10,7 @@
 <body>
 
 <?php
-session_start();
+include "templates/header.php";
 require_once '../src/DBconnect.php';
 
 
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_order_id'])) {
 $orders = getOrders($connection);
 
 
-include "templates/header.php";
+
 
 //display
 echo "<h2>Orders</h2>";

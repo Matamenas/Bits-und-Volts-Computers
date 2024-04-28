@@ -28,13 +28,15 @@ $customerId = $customer['id'] ?? null;
 if ($customerId) {
     //fetch cart items from cart_items table based on cart id
     $sql = "SELECT products.*, cart_items.quantity 
-            FROM products 
-            INNER JOIN cart_items ON products.id = cart_items.product_id 
-            WHERE cart_items.cart_id = :cart_id AND cart_items.quantity > 0";
+        FROM products 
+        INNER JOIN cart_items ON products.id = cart_items.product_id 
+        INNER JOIN cart ON cart.id = cart_items.cart_id 
+        WHERE cart.customer_id = :customer_id AND cart_items.quantity > 0";
+
     $statement = $connection->prepare($sql);
-    $statement->bindParam(':cart_id', $customerId);
+    $statement->bindParam(':customer_id', $customerId);
     $statement->execute();
-    $cartItems = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $cartItems = $statement->fetchAll(PDO::FETCH_ASSOC);;
 } else {
     $cartItems = [];
 }
@@ -44,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
     $productId = $_POST['product_id'];
 
     
-    $sql = "UPDATE cart_items SET quantity = quantity - 1 WHERE cart_id = :cart_id AND product_id = :product_id";
+    $sql = "UPDATE cart_items SET quantity = quantity WHERE cart_id = :cart_id AND product_id = :product_id";
     $statement = $connection->prepare($sql);
     $statement->bindParam(':cart_id', $customerId);
     $statement->bindParam(':product_id', $productId);
