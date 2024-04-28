@@ -1,8 +1,5 @@
 <?php
-/**
- * Configuration for customer database connection
- *
- */
+
 $host = "localhost";
 $username = "DatabaseUser";
 $password = "";

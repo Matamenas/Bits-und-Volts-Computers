@@ -11,7 +11,7 @@
   <div class="navbar-right">
     <a href="login.php" class="login-btn">
       <p>Login/Register</p>
-      <img src="Images/" alt="Login/Register" class="circular-image">
+    
     </a>
   </div>
 </div>

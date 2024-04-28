@@ -2,29 +2,73 @@
 session_start();
 require_once '../src/DBconnect.php';
 
-// Check if the product is being added to the cart
+//check if product is being added into the cart
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id']) && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['email'])) {
-    // Get product ID from POST data
-    $productId = $_POST['product_id'];
+    //get product id from the form
+    $productId = filter_input(INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT);
     
-    // Fetch customer ID from the database based on the logged-in user's email
-    $email = $_SESSION['email'];
-    $sql = "SELECT id FROM customer WHERE email = :email";
-    $statement = $connection->prepare($sql);
-    $statement->bindParam(':email', $email);
-    $statement->execute();
-    $customer = $statement->fetch(PDO::FETCH_ASSOC);
-    $customerId = $customer['id'];
-    
-    // Insert the product into the cart table for the current customer
-    $sql = "INSERT INTO cart (customer_id, product_id, quantity) VALUES (:customer_id, :product_id, 1) ON DUPLICATE KEY UPDATE quantity = quantity + 1";
-    $statement = $connection->prepare($sql);
-    $statement->bindParam(':customer_id', $customerId);
-    $statement->bindParam(':product_id', $productId);
-    $statement->execute();
+    try {
+        //fetch customer id based on the email of the user
+        $email = $_SESSION['email'];
+        $sql = "SELECT id FROM customer WHERE email = :email";
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        $customer = $statement->fetch(PDO::FETCH_ASSOC);
+        $customerId = $customer['id'];
+        
+        //check if user already has a cart
+        $sql = "SELECT id FROM cart WHERE customer_id = :customer_id";
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':customer_id', $customerId);
+        $statement->execute();
+        $cart = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        //create a new cart if the user does not have one
+        if (!$cart) {
+            $sql = "INSERT INTO cart (customer_id, created_at) VALUES (:customer_id, NOW())";
+            $statement = $connection->prepare($sql);
+            $statement->bindParam(':customer_id', $customerId);
+            $statement->execute();
+            //fetch new cart id
+            $cartId = $connection->lastInsertId();
+        } else {
+            //use the existing cart id
+            $cartId = $cart['id'];
+        }
+        
+        //check if product is already in the cart
+        $sql = "SELECT * FROM cart_items WHERE cart_id = :cart_id AND product_id = :product_id";
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':cart_id', $cartId);
+        $statement->bindParam(':product_id', $productId);
+        $statement->execute();
+        $existingProduct = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        if ($existingProduct) {
+            //if product is already in the cart just update the quantity
+            $sql = "UPDATE cart_items SET quantity = quantity + 1 WHERE cart_id = :cart_id AND product_id = :product_id";
+        } else {
+            //if product not in cart create a new cart item
+            $sql = "INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (:cart_id, :product_id, 1)";
+        }
+
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':cart_id', $cartId);
+        $statement->bindParam(':product_id', $productId);
+        $statement->execute();
+        
+        //redirect to products page
+        header("Location: ProductsPage.php");
+        exit;
+    } catch (PDOException $e) {
+        
+        echo "Error: " . $e->getMessage();
+        exit;
+    }
 }
 
-// Fetch product information from the database
+//fetch info from database
 $sql = "SELECT * FROM products";
 $statement = $connection->prepare($sql);
 $statement->execute();
@@ -49,7 +93,7 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
                     <h2><?php echo $product['name']; ?></h2>
                     <p><?php echo $product['description']; ?></p>
                     <p>Price: $<?php echo $product['price']; ?></p>
-                    <!-- Add to Cart button -->
+                   
                     <form action="" method="post">
                         <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                         <input type="submit" value="Add to Cart">
@@ -57,8 +101,13 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             <?php endforeach; ?>
         </div>
-        <!-- Display a link to the cart page -->
-        <a href="Cart.php">View Cart</a>
+        <a href="Cart.php" class="button">View Cart</a><br>
+
+        <a href="indexlogged.php" class="button">HomePage</a>
+        
+
     </div>
+   
 </body>
 </html>
+ 

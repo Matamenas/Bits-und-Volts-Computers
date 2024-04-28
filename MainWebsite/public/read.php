@@ -1,7 +1,7 @@
 <?php
 /**
- * Function to query information based on
- * a parameter: in this case, location.
+ * 
+ * 
  *
  */
 if (isset($_POST['submit'])) {
