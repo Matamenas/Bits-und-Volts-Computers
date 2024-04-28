@@ -25,10 +25,11 @@
             <input type="file" id="product_image" name="product_image" accept="image/*" required>
 
             <input type="submit" value="Add Product" name="submit">
-
+            <br>
+            <br>
             <a href="DeleteProduct.php" class="btn">Go to Delete Products Page</a>
         </form>
-
+        <br>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $productName = $_POST["product_name"];

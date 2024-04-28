@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
 require "templates/header.php";
 if (isset($_POST['submit']) && $statement) {
     echo $new_user['firstname']. ' successfully added';
-    header("Location: dashboard.php");
+    header("Location: login.php?registered=true");
     exit;
     }
 ?>

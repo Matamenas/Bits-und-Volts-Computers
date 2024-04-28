@@ -90,7 +90,7 @@ if(isset($_FILES['upload'])) {
 
 <div class="navbar">
   <div class="navbar-left">
-    <a href="index.php">Home Page</a>
+    <a href="indexlogged.php">Home Page</a>
     <a href="dashboard.php">Dashboard</a>
     <a href="ProductsPage.php">Products</a>
   </div>

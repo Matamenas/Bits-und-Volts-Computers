@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
             <input type="submit" name="delete_product" value="Delete Product">
         </form>
-        <a href="AddProducts.php">Back to AddProducts</a>
+        <a href="AddProducts.php">Back to Adding Products</a>
     </div>
 </body>
 </html>

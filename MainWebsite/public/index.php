@@ -19,8 +19,8 @@
 
   <div class="row">
     <div class="column">
-      <h2>Column 1</h2>
-      <p>Content for column 1 goes here.</p>
+      <h2>Bits Und Volts Computers</h2>
+      <p></p>
     </div>
     <div class="column">
       <h2>Column 2</h2>
