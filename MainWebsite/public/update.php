@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Customer Info</title>
-    <link rel="stylesheet" href="css/UpdateStyling.css"> <!-- Link your CSS file -->
+    <link rel="stylesheet" href="css/UpdateStyling.css"> 
 </head>
 <body>
     <?php
     session_start();
 
-    // Check if a user is logged in
+    //check login status
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['email'])) {
         $email = $_SESSION['email'];
 

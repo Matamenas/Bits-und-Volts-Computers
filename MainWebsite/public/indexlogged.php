@@ -1,27 +1,26 @@
 <?php
-// Start session
+
 session_start();
 
-// Redirect to index.php if user is not logged in
+//check login status
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: index.php");
     exit;
 }
 
-// Include header
 include "templates/header.php";
 
 
 
-// Logout logic
+//logout logic
 if(isset($_POST['logout'])) {
-    // Unset all session variables
+   
     $_SESSION = array();
 
-    // Destroy the session
+ 
     session_destroy();
 
-    // Redirect to index.php
+    
     header("Location: index.php");
     exit;
 }
@@ -37,7 +36,7 @@ if(isset($_POST['logout'])) {
     <a href="ProductsPage.php">Products</a>
     <a href="Tickets.php">Customer Service</a>
     <?php
-    // Display AdminPanel link if the user's email is 'Admin123@gmail.com'
+    //checks if user is admin and displays admin panel link on nav bar
     if(isset($_SESSION['email']) && $_SESSION['email'] === 'Admin123@gmail.com') {
         echo '<a href="AddProducts.php">Admin Panel</a>';
     }
@@ -45,7 +44,7 @@ if(isset($_POST['logout'])) {
   </div>
   <div class="navbar-right">
     <?php
-    // Display welcome message if user is logged in
+    //display welcome message
     if(isset($_SESSION['email'])) {
         echo "<div class='login-btn'>";
         echo "<p>Welcome " . $_SESSION['email'] . "</p></div>";

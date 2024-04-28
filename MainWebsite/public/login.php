@@ -10,11 +10,11 @@ if (isset($_POST['submit'])) {
     try {
         require_once '../src/DBconnect.php';
         $connection = new PDO($dsn, $username, $password, $options);
-
+        //login user checks
         $statement = $connection->prepare("SELECT * FROM customer WHERE email = :email");
         $statement->execute(['email' => $email]);
         $user = $statement->fetch();
-
+        //check if the user exists and the password is correct //added admin check that checks if a permissioned user logs in
         if ($user && $userPassword === $user['password']) {
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;

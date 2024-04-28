@@ -2,13 +2,13 @@
 session_start();
 require_once '../src/DBconnect.php';
 
-// Check if user is logged in
+//check login status
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['email'])) {
     header("Location: index.php");
     exit;
 }
 
-// Fetch customer ID from the database based on the logged-in user's email
+//customer id based on email address
 $email = $_SESSION['email'];
 $sql = "SELECT id FROM customer WHERE email = :email";
 $statement = $connection->prepare($sql);
@@ -16,7 +16,7 @@ $statement->bindParam(':email', $email);
 $statement->execute();
 $customer = $statement->fetch(PDO::FETCH_ASSOC);
 
-// Fetch cart items from the database for the current customer's cart
+//fetch the cart items of user based on id
 $customerId = $customer['id'] ?? null;
 if ($customerId) {
     $sql = "SELECT products.*, cart_items.quantity 
@@ -31,19 +31,19 @@ if ($customerId) {
     $cartItems = [];
 }
 
-// If cart is empty, redirect to cart page
+//if cart is empty redirect to products page
 if (empty($cartItems)) {
     header("Location: ProductsPage.php");
     exit;
 }
 
-// Calculate total amount including shipping cost
+//calculate the cart total 
 $totalAmount = 0;
 foreach ($cartItems as $item) {
     $totalAmount += $item['price'] * $item['quantity'];
 }
 
-// Calculate shipping cost
+//calculate shippping costs //removed fast shipping option
 $shippingCost = 0;
 if (isset($_POST['shipping']) && $_POST['shipping'] === 'fast') {
     $shippingCost = 7;
@@ -51,12 +51,12 @@ if (isset($_POST['shipping']) && $_POST['shipping'] === 'fast') {
     $shippingCost = 4;
 }
 
-// Add shipping cost to total amount
+//add both the costs together
 $totalAmount += $shippingCost;
 
-// Insert order into orders table
+//insert order into orders table
 $orderDate = date('Y-m-d H:i:s');
-$status = 'pending'; // Set initial status to pending
+$status = 'pending'; //initial status set to pending //update in admin panel
 $sql = "INSERT INTO orders (customer_id, order_date, total_amount, status) VALUES (:customer_id, :order_date, :total_amount, :status)";
 $statement = $connection->prepare($sql);
 $statement->bindParam(':customer_id', $customerId);
@@ -66,7 +66,7 @@ $statement->bindParam(':status', $status);
 $statement->execute();
 $orderId = $connection->lastInsertId();
 
-// Insert order items into order_items table
+//insert order items into the order_items table based on order id
 foreach ($cartItems as $item) {
     $productId = $item['id'];
     $quantity = $item['quantity'];
@@ -78,7 +78,7 @@ foreach ($cartItems as $item) {
     $statement->execute();
 }
 
-// Clear cart
+//clear the cart 
 $sql = "DELETE FROM cart_items WHERE cart_id = :cart_id";
 $statement = $connection->prepare($sql);
 $statement->bindParam(':cart_id', $customerId);

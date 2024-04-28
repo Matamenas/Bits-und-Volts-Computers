@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// Check if user is logged in
+//check login status //dashboard to acces different account options
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: index.php");
     exit;
 }
 
-// Include header
+
 include "templates/header.php";
 ?>
 <link rel="stylesheet" href="css/DashboardStyling.css">
@@ -22,6 +22,6 @@ include "templates/header.php";
 </div>
 
 <?php
-// Include footer
+
 include "templates/footer.php";
 ?>

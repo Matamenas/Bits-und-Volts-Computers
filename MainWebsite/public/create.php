@@ -9,6 +9,7 @@
 </head>
 
 <?php
+//form to create a new user in the database aka the register page
 if (isset($_POST['submit'])) {
     require '../common.php';
     try {

@@ -1,23 +1,23 @@
 <?php
 session_start();
-require_once '../src/DBconnect.php'; // Include the file containing database connection logic
+require_once '../src/DBconnect.php'; 
 
-// Check if user is logged in
+//check login status
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['email'])) {
     header("Location: index.php");
     exit;
 }
 
-// Fetch customer ID from the database based on the logged-in user's email
-$email = $_SESSION['email']; // Assuming the email is stored in the session
+//customer id based on the users email
+$email = $_SESSION['email']; 
 if (!empty($email)) {
-    $sql = "SELECT id FROM customer WHERE email = :email"; // SQL query to select customer ID based on email
-    $statement = $connection->prepare($sql); // Prepare the SQL statement
-    $statement->bindParam(':email', $email); // Bind the email parameter
-    $statement->execute(); // Execute the statement
-    $customer = $statement->fetch(PDO::FETCH_ASSOC); // Fetch the result as an associative array
+    $sql = "SELECT id FROM customer WHERE email = :email"; 
+    $statement = $connection->prepare($sql); 
+    $statement->bindParam(':email', $email); 
+    $statement->execute(); 
+    $customer = $statement->fetch(PDO::FETCH_ASSOC); 
 
-    // Check if a customer ID is found
+    //check if customer id is found
     if ($customer) {
         $customer_id = $customer['id'];
     } else {
@@ -29,17 +29,17 @@ if (!empty($email)) {
     exit;
 }
 
-// Check if the form is submitted
+//check if form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+ 
     $order_id = $_POST["order_id"];
     $issue_text = $_POST["issue_text"];
 
-    // Validate form data
+    
     if (empty($order_id) || empty($issue_text)) {
         $error_message = "Please fill in all required fields.";
     } else {
-        // Insert ticket into the database
+        //insert the ticket into the database
         $sql = "INSERT INTO Tickets (customer_id, order_id, issue_text) VALUES (?, ?, ?)";
         $stmt = $connection->prepare($sql);
         if ($stmt->execute([$customer_id, $order_id, $issue_text])) {
@@ -62,11 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <h1>Customer Support</h1>
     <?php
-    // Display error message if any
+    
     if (isset($error_message)) {
         echo "<p style='color: red;'>$error_message</p>";
     }
-    // Display success message if any
+    
     if (isset($success_message)) {
         echo "<p style='color: green;'>$success_message</p>";
     }

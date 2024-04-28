@@ -2,20 +2,20 @@
 session_start();
 require_once '../src/DBconnect.php';
 
-// Check if user is logged in
+//check login status
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_SESSION['email'])) {
     header("Location: index.php");
     exit;
 }
 
-// Include header
+
 include "templates/header.php";
 
-// Display logged-in user's email
+//display logged in users details
 echo "<h2>Account Dashboard</h2>";
 echo "<p>You are logged in as " . $_SESSION['email'] . "</p>";
 
-// Fetch customer ID from the database based on the logged-in user's email
+//fetch id based on email address 
 $email = $_SESSION['email'];
 $sql = "SELECT id FROM customer WHERE email = :email";
 $statement = $connection->prepare($sql);
@@ -23,10 +23,10 @@ $statement->bindParam(':email', $email);
 $statement->execute();
 $customer = $statement->fetch(PDO::FETCH_ASSOC);
 
-// Fetch cart ID for the logged-in customer
+//fetch cart id for selected customer id
 $customerId = $customer['id'] ?? null;
 if ($customerId) {
-    // Fetch cart items from the database for the current customer's cart
+    //fetch cart items from cart_items table based on cart id
     $sql = "SELECT products.*, cart_items.quantity 
             FROM products 
             INNER JOIN cart_items ON products.id = cart_items.product_id 
@@ -39,26 +39,26 @@ if ($customerId) {
     $cartItems = [];
 }
 
-// Decrease item quantity by one if remove button is clicked
+//decrease quantity of items in cart and database
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
-    // Get product ID from POST data
+    //get product id
     $productId = $_POST['product_id'];
 
-    // Decrease the quantity of the product in the cart by one
+    
     $sql = "UPDATE cart_items SET quantity = quantity - 1 WHERE cart_id = :cart_id AND product_id = :product_id";
     $statement = $connection->prepare($sql);
     $statement->bindParam(':cart_id', $customerId);
     $statement->bindParam(':product_id', $productId);
     $statement->execute();
 
-    // Check if quantity has reached 0 and remove item from cart
+    //check if the amount has reached 0 
     $sql = "DELETE FROM cart_items WHERE cart_id = :cart_id AND product_id = :product_id AND quantity = 0";
     $statement = $connection->prepare($sql);
     $statement->bindParam(':cart_id', $customerId);
     $statement->bindParam(':product_id', $productId);
     $statement->execute();
 
-    // Redirect back to the cart page to update the display
+    //update the info
     header("Location: Cart.php");
     exit;
 }
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
                         <p>Price: $<?php echo $item['price']; ?></p>
                         <p>Quantity: <?php echo $item['quantity']; ?></p>
                         
-                        <!-- Form to decrease item quantity by one -->
+                        
                         <form action="Cart.php" method="post">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <input type="submit" value="Remove">
@@ -97,14 +97,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
                     <?php $total += $item['price'] * $item['quantity']; ?>
                 <?php endforeach; ?>
                 <?php
-                    // Calculate shipping cost based on selected option
+                    //calculate shipping cost //removed fast shipping
                     $shippingCost = 0;
                     if (isset($_POST['shipping']) && $_POST['shipping'] === 'fast') {
                         $shippingCost = 7;
                     } else {
                         $shippingCost = 4;
                     }
-                    // Add shipping cost to total
+                    
                     $total += $shippingCost;
                 ?>
                 <div class="subtotal">
@@ -131,6 +131,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
 </html>
 
 <?php
-// Include footer
+
 include "templates/footer.php";
 ?>

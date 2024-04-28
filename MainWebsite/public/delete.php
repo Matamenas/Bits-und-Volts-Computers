@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Users</title>
-    <link rel="stylesheet" href="css/DeletesStyling.css"> <!-- Link your CSS file -->
+    <link rel="stylesheet" href="css/DeletesStyling.css"> 
 </head>
 <body>
     <?php
     require "../common.php";
     $success = "";
 
-    // Check if a user is logged in
+    //check login status
     session_start();
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && isset($_SESSION['email'])) {
         $email = $_SESSION['email'];
-
+        //delete a user account
         if (isset($_GET["id"])) {
             try {
                 require_once '../src/DBconnect.php';
@@ -39,7 +39,7 @@
             $statement->execute();
             $result = $statement->fetchAll();
 
-            // Debugging output
+            
             var_dump($result);
         } catch(PDOException $error) {
             echo $sql . "<br>" . $error->getMessage();

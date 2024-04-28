@@ -1,7 +1,7 @@
 <?php
 /**
- * Use an HTML form to edit an entry in the
- * customer table.
+ * 
+ * 
  *
  */
 require "../common.php";

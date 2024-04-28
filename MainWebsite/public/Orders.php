@@ -16,13 +16,13 @@ require_once '../src/DBconnect.php';
 
 
 
-// Check if user is logged in and has permission to access orders
+//check login status
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['email'] !== 'Admin123@gmail.com') {
     header("Location: index.php"); // Redirect unauthorized users
     exit;
 }
 
-// Function to get orders from the database
+//pull orders from database
 function getOrders($connection) {
     $sql = "SELECT * FROM orders";
     $statement = $connection->prepare($sql);
@@ -30,7 +30,7 @@ function getOrders($connection) {
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Function to update the status of an order
+//update status on selected order
 function updateOrderStatus($connection, $orderId, $status) {
     $sql = "UPDATE orders SET status = :status WHERE id = :order_id";
     $statement = $connection->prepare($sql);
@@ -39,57 +39,57 @@ function updateOrderStatus($connection, $orderId, $status) {
     return $statement->execute();
 }
 
-// Function to delete an order
+//delete a certain order
 function deleteOrder($connection, $orderId) {
     try {
-        // Begin transaction
+        
         $connection->beginTransaction();
 
-        // Delete related records in order_items table
+        
         $sql = "DELETE FROM order_items WHERE order_id = :order_id";
         $statement = $connection->prepare($sql);
         $statement->bindParam(':order_id', $orderId);
         $statement->execute();
 
-        // Delete the order
+        
         $sql = "DELETE FROM orders WHERE id = :order_id";
         $statement = $connection->prepare($sql);
         $statement->bindParam(':order_id', $orderId);
         $statement->execute();
 
-        // Commit transaction
+        
         $connection->commit();
 
-        return true; // Return true on success
+        return true; 
     } catch (PDOException $e) {
-        // Rollback transaction on error
+        
         $connection->rollBack();
-        // Handle or log the error
+       
         echo "Error: " . $e->getMessage();
-        return false; // Return false on failure
+        return false; 
     }
 }
 
-// Handle status update request
+//handle status update
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['order_id'], $_POST['status'])) {
     $orderId = $_POST['order_id'];
     $status = $_POST['status'];
     updateOrderStatus($connection, $orderId, $status);
 }
 
-// Handle delete request
+//handle delete request
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_order_id'])) {
     $orderId = $_POST['delete_order_id'];
     deleteOrder($connection, $orderId);
 }
 
-// Get orders from the database
+//get orders from database
 $orders = getOrders($connection);
 
-// Include header
+
 include "templates/header.php";
 
-// Display orders
+//display
 echo "<h2>Orders</h2>";
 echo "<table>";
 echo "<tr><th>ID</th><th>Customer ID</th><th>Order Date</th><th>Total Amount</th><th>Status</th><th>Action</th></tr>";
@@ -120,7 +120,7 @@ foreach ($orders as $order) {
 }
 echo "</table>";
 
-// Include footer
+
 
 include "templates/footer.php";
 ?>
