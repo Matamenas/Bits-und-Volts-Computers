@@ -27,7 +27,7 @@ if(isset($_POST['logout'])) {
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="css/index.css"> <!-- Link your index.css file -->
+<link rel="stylesheet" type="text/css" href="css/index.css"> 
 
 <div class="navbar">
   <div class="navbar-left">
