@@ -25,24 +25,29 @@
             <input type="file" id="product_image" name="product_image" accept="image/*" required>
 
             <input type="submit" value="Add Product" name="submit">
-            <br>
-            <br>
-            <a href="DeleteProduct.php" class="btn">Go to Delete Products Page</a>
         </form>
-        <br>
+
+        <div class="button-container">
+            <a href="DeleteProduct.php" class="btn">Go to Delete Products Page</a><br>
+            <a href="Orders.php" class="btn">Go to Orders Page</a><br>
+            <a href="indexlogged.php">Back to HomePage</a>
+        </div>
+
+   
+
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $productName = $_POST["product_name"];
             $productDescription = $_POST["product_description"];
             $productPrice = $_POST["product_price"];
 
-            // Handle file upload for product image
+            //upload image based on name to uploads folder
             $targetDir = "uploads/";
             $targetFile = $targetDir . basename($_FILES["product_image"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-            // Check if image file is an actual image or fake image
+            //check if image is correct format
             $check = getimagesize($_FILES["product_image"]["tmp_name"]);
             if ($check !== false) {
                 $uploadOk = 1;
@@ -50,37 +55,37 @@
                 $uploadOk = 0;
             }
 
-            // Check file size
+            //check image size
             if ($_FILES["product_image"]["size"] > 500000) {
                 echo "<p class='error'>Sorry, your file is too large.</p>";
                 $uploadOk = 0;
             }
 
-            // Allow certain file formats
+            //allow only image and gif files
             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif") {
                 echo "<p class='error'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</p>";
                 $uploadOk = 0;
             }
 
-            // Check if $uploadOk is set to 0 by an error
+        
             if ($uploadOk == 0) {
                 echo "<p class='error'>Sorry, your file was not uploaded.</p>";
-                // if everything is ok, try to upload file
+               
             } else {
                 if (move_uploaded_file($_FILES["product_image"]["tmp_name"], $targetFile)) {
-                    // Include database connection file
+                    
                     require_once '../src/DBconnect.php';
 
-                    // Prepare SQL statement to insert product details
+                    //sql statements to insert the image values into the database
                     $sql = "INSERT INTO products (name, description, price, stock) VALUES (:name, :description, :price, :stock)";
                     $statement = $connection->prepare($sql);
 
-                    // Bind parameters and execute the statement
+                    //bind paramaters and execute the statement
                     $statement->bindValue(':name', $productName);
                     $statement->bindValue(':description', $productDescription);
                     $statement->bindValue(':price', $productPrice);
-                    // Assuming stock is 0 initially for a new product
+                    
                     $statement->bindValue(':stock', 0);
 
                     if ($statement->execute()) {

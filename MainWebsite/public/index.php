@@ -1,5 +1,4 @@
 <?php include "templates/header.php"; ?>
-
 <link rel="stylesheet" type="text/css" href="css/Index.css">
 
 <div class="navbar">
@@ -19,8 +18,8 @@
 
   <div class="row">
     <div class="column">
-      <h2>Bits Und Volts Computers</h2>
-      <p></p>
+      <h2>Column 1</h2>
+      <p>Content for column 1 goes here.</p>
     </div>
     <div class="column">
       <h2>Column 2</h2>
@@ -32,5 +31,10 @@
     </div>
   </div>
 
-<?php include "templates/homePageFooter.php"; ?>
+  <div class="footer">
+    <p>This is the footer.</p>
+  </div>
+</div>
+
+<?php include "templates/footer.php"; ?>
 
