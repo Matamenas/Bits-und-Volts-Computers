@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id']) && isset
         
         if ($existingProduct) {
             //if product is already in the cart just update the quantity
-            $sql = "UPDATE cart_items SET quantity = quantity WHERE cart_id = :cart_id AND product_id = :product_id";
+            $sql = "UPDATE cart_items SET quantity = quantity + 1 WHERE cart_id = :cart_id AND product_id = :product_id";
         } else {
             //if product not in cart create a new cart item
             $sql = "INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (:cart_id, :product_id, 1)";
@@ -86,6 +86,10 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <div class="container">
         <h1>Products Page</h1>
+        <a href="Cart.php" class="button">View Cart</a> &nbsp;&nbsp;&nbsp;
+
+        <a href="indexlogged.php" class="btn">HomePage</a>
+    <br><br>
         <div class="products">
             <?php foreach ($products as $product): ?>
                 <div class="product">
@@ -101,6 +105,7 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             <?php endforeach; ?>
         </div>
+        <br>
         <a href="Cart.php" class="button">View Cart</a> &nbsp;&nbsp;&nbsp;
 
         <a href="indexlogged.php" class="btn">HomePage</a>

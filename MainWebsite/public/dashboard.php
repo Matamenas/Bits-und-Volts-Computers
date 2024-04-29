@@ -20,4 +20,3 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     </ul>
     <a href="indexlogged.php" class="btn">Back to Home</a>
 </div>
-

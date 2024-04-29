@@ -7,13 +7,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || !isset($_
     header("Location: index.php");
     exit;
 }
-
-
-
-
 //display logged in users details
 echo "<h2>Account Dashboard</h2>";
 echo "<p>You are logged in as " . $_SESSION['email'] . "</p>";
+?>
+<a href="indexlogged.php" class="button">Return to home page</a>
+<?php
+
 
 //fetch id based on email address 
 $email = $_SESSION['email'];
@@ -40,26 +40,27 @@ if ($customerId) {
 } else {
     $cartItems = [];
 }
-//decrease quantity of items in cart and database
+// Decrease quantity of items in cart and database
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
-    //get product id
+    // Get product id
     $productId = $_POST['product_id'];
 
-    
-    $sql = "UPDATE cart_items SET quantity = quantity WHERE cart_id = :cart_id AND product_id = :product_id";
+    $sql = "UPDATE cart_items SET quantity = quantity - 1 WHERE cart_id = :cart_id AND product_id = :product_id";
     $statement = $connection->prepare($sql);
     $statement->bindParam(':cart_id', $customerId);
+    // Correct the binding to use the correct column name
     $statement->bindParam(':product_id', $productId);
     $statement->execute();
 
-    //check if the amount has reached 0 
+    // Check if the amount has reached 0
     $sql = "DELETE FROM cart_items WHERE cart_id = :cart_id AND product_id = :product_id AND quantity = 0";
     $statement = $connection->prepare($sql);
     $statement->bindParam(':cart_id', $customerId);
+    // Correct the binding to use the correct column name
     $statement->bindParam(':product_id', $productId);
     $statement->execute();
 
-    //update the info
+    // Update the info
     header("Location: Cart.php");
     exit;
 }
@@ -78,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
         <h1>Shopping Cart</h1>
         <div class="cart-items">
             <?php if (empty($cartItems)): ?>
-                <p>Your cart is empty.</p>
+                <h3>Your cart is empty.</h3>
             <?php else: ?>
                 <?php $total = 0; ?>
                 <?php foreach ($cartItems as $item): ?>
@@ -120,13 +121,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['product_id'])) {
                     </div>
                 </div>
 
-                
                 <a href="Checkout1.php" class="checkout-btn">Proceed to Checkout</a><br>
 
                 
             <?php endif; ?>
         </div>
-        <a href="indexlogged.php" class="button">HomePage</a>
+        <br>
+
     </div>
 </body>
 </html>

@@ -50,7 +50,7 @@ if (isset($_POST['submit']) && $statement) {
             <input type="email" name="email" id="email" required>
             <label for="password">Password</label>
             <input type="password" name="password" id="password" required>
-            <input type="submit" name="submit" value="Submit">
+            <input type="submit" name="submit" value="Register" class="btn">
         </form>
     </div>
     <a href="indexlogged.php" class="btn">Back to home</a>

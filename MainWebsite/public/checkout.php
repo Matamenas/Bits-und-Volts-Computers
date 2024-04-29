@@ -99,7 +99,7 @@ $statement->execute();
         <p>Your order has been placed successfully!</p>
         <p>Reference ID: <?php echo $orderId; ?></p>
         <p>Total Amount: $<?php echo number_format($totalAmount, 2); ?></p>
-        <a href="index.php" class="continue-shopping-btn">Continue Shopping</a>
+        <a href="IndexLogged.php" class="continue-shopping-btn">Continue Shopping</a>
     </div>
 </body>
 </html>
