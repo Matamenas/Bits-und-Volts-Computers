@@ -1,0 +1,6 @@
+https://www.php.net/
+
+https://www.php.net/manual/en/book.pdo.php
+
+https://www.w3schools.com/SQL/sql_join_inner.asp
+

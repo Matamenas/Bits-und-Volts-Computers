@@ -1,0 +1,6 @@
+Enrico - Database, PHP Queries.
+
+Matas - HTML, CSS, PHP Queries.
+
+Patryk - HTML, CSS PHP Queries, Database.
+
